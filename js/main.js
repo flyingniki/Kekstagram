@@ -1,3 +1,3 @@
 import { addPhotos } from './data.js';
 
-addPhotos();
+let photos = addPhotos();
