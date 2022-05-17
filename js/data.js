@@ -71,9 +71,9 @@ function addComments() {
 }
 
 function addPhotos() {
-  let items = [];
+  let photos = [];
   for (let i = 0; i < PHOTOS_COUNT; i++) {
-    items.push({
+    photos.push({
       id: i + 1,
       url: 'photos/' + (i + 1) + '.jpg',
       description: getRandomElement(DESCRIPTIONS_PHOTOS),
@@ -81,7 +81,7 @@ function addPhotos() {
       comments: addComments(),
     });
   }
-  return items;
+  return photos;
 }
 
 export { addPhotos };
