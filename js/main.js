@@ -1,3 +1,5 @@
 import { addPhotos } from './data.js';
 
-let photos = addPhotos();
+let photos = [];
+
+photos = addPhotos();
