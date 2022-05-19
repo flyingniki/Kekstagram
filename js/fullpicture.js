@@ -1,3 +1,7 @@
+const commentCount = document.querySelector('.social__comment-count');
+const commentsLoader = document.querySelector('.comments-loader');
+const body = document.querySelector('body');
+
 const picture = document.querySelector('.big-picture');
 const pictureImg = document.querySelector('.big-picture__img > img');
 const pictureLikes = document.querySelector('.likes-count');
@@ -9,13 +13,13 @@ const pictureCommentsFragment = document.createDocumentFragment();
 
 const pictureDescription = document.querySelector('.social__caption');
 
-const buttonClose = document.querySelector('.big-picture__cancel');
+const buttonClose = picture.querySelector('.big-picture__cancel');
 
 function showPicture(url, comments, likes, description) {
   picture.classList.remove('hidden');
-  document.querySelector('.social__comment-count').classList.add('hidden');
-  document.querySelector('.comments-loader').classList.add('hidden');
-  document.querySelector('body').classList.add('modal-open');
+  commentCount.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
+  body.classList.add('modal-open');
 
   pictureImg.src = url;
   pictureLikes.textContent = likes;
@@ -36,14 +40,14 @@ function showPicture(url, comments, likes, description) {
 
 buttonClose.addEventListener('click', () => {
   picture.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
+  body.classList.remove('modal-open');
 });
 
 document.addEventListener('keydown', (evt) => {
   const keyName = evt.key;
   if (keyName === 'Escape') {
     picture.classList.add('hidden');
-    document.querySelector('body').classList.remove('modal-open');
+    body.classList.remove('modal-open');
   }
 });
 
