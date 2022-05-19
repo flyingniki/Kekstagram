@@ -17,6 +17,7 @@ const buttonClose = picture.querySelector('.big-picture__cancel');
 
 function showPicture(url, comments, likes, description) {
   picture.classList.remove('hidden');
+  pictureCommentsList.innerHTML = '';
   commentCount.classList.add('hidden');
   commentsLoader.classList.add('hidden');
   body.classList.add('modal-open');
@@ -26,12 +27,12 @@ function showPicture(url, comments, likes, description) {
   pictureCommentsCount.textContent = comments.length;
   pictureDescription.textContent = description;
 
-  comments.forEach((comment) => {
+  comments.forEach(({ avatar, name, message }) => {
     const commentElement = pictureComment.cloneNode(true);
 
-    commentElement.querySelector('.social__picture').src = comment.avatar;
-    commentElement.querySelector('.social__picture').alt = comment.name;
-    commentElement.querySelector('.social__text').textContent = comment.message;
+    commentElement.querySelector('.social__picture').src = avatar;
+    commentElement.querySelector('.social__picture').alt = name;
+    commentElement.querySelector('.social__text').textContent = message;
     pictureCommentsFragment.appendChild(commentElement);
   });
 
