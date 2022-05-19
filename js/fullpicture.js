@@ -36,12 +36,14 @@ function showPicture(url, comments, likes, description) {
 
 buttonClose.addEventListener('click', () => {
   picture.classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
 });
 
 document.addEventListener('keydown', (evt) => {
   const keyName = evt.key;
   if (keyName === 'Escape') {
     picture.classList.add('hidden');
+    document.querySelector('body').classList.remove('modal-open');
   }
 });
 
