@@ -37,19 +37,28 @@ function showPicture(url, comments, likes, description) {
   });
 
   pictureCommentsList.appendChild(pictureCommentsFragment);
+
+  closeModalEventListeners();
 }
 
-buttonClose.addEventListener('click', () => {
+const buttonCloseHandler = () => {
   picture.classList.add('hidden');
   body.classList.remove('modal-open');
-});
+  buttonClose.removeEventListener('click', buttonCloseHandler);
+};
 
-document.addEventListener('keydown', (evt) => {
+const keyEscHandler = (evt) => {
   const keyName = evt.key;
   if (keyName === 'Escape') {
     picture.classList.add('hidden');
     body.classList.remove('modal-open');
+    document.removeEventListener('keydown', keyEscHandler);
   }
-});
+};
+
+const closeModalEventListeners = () => {
+  buttonClose.addEventListener('click', buttonCloseHandler);
+  document.addEventListener('keydown', keyEscHandler);
+};
 
 export { showPicture };

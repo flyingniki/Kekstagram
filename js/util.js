@@ -8,11 +8,11 @@ function getRandomInt(min, max) {
   return null;
 }
 
-function strMaxLenght(string, maxLength) {
-  return string.length <= maxLength ? true : false;
+function strMaxLength(string, maxLength) {
+  return string.length <= maxLength;
 }
 
-strMaxLenght('Test string', 140);
+strMaxLength('Test string', 140);
 
 function getRandomElement(array) {
   let index = getRandomInt(0, array.length - 1);
