@@ -38,7 +38,8 @@ function showPicture(url, comments, likes, description) {
 
   pictureCommentsList.appendChild(pictureCommentsFragment);
 
-  closeModalEventListeners();
+  buttonClose.addEventListener('click', buttonCloseHandler);
+  document.addEventListener('keydown', keyEscHandler);
 }
 
 const buttonCloseHandler = () => {
@@ -48,17 +49,11 @@ const buttonCloseHandler = () => {
 };
 
 const keyEscHandler = (evt) => {
-  const keyName = evt.key;
-  if (keyName === 'Escape') {
+  if (evt.key === 'Escape') {
     picture.classList.add('hidden');
     body.classList.remove('modal-open');
     document.removeEventListener('keydown', keyEscHandler);
   }
-};
-
-const closeModalEventListeners = () => {
-  buttonClose.addEventListener('click', buttonCloseHandler);
-  document.addEventListener('keydown', keyEscHandler);
 };
 
 export { showPicture };
