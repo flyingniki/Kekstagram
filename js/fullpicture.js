@@ -49,7 +49,7 @@ const buttonCloseHandler = () => {
 };
 
 const keyEscHandler = (evt) => {
-  if (evt.key === 'Escape') {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
     picture.classList.add('hidden');
     body.classList.remove('modal-open');
     document.removeEventListener('keydown', keyEscHandler);
