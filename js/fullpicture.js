@@ -42,17 +42,20 @@ function showPicture(url, comments, likes, description) {
   document.addEventListener('keydown', keyEscHandler);
 }
 
-const buttonCloseHandler = () => {
+const closeModal = () => {
   picture.classList.add('hidden');
   body.classList.remove('modal-open');
   buttonClose.removeEventListener('click', buttonCloseHandler);
+  document.removeEventListener('keydown', keyEscHandler);
+};
+
+const buttonCloseHandler = () => {
+  closeModal();
 };
 
 const keyEscHandler = (evt) => {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
-    picture.classList.add('hidden');
-    body.classList.remove('modal-open');
-    document.removeEventListener('keydown', keyEscHandler);
+    closeModal();
   }
 };
 
