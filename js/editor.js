@@ -3,15 +3,12 @@ const imgEditor = document.querySelector('.img-upload__overlay');
 const closeImgEditor = document.querySelector('#upload-cancel');
 const body = document.querySelector('body');
 
-uploadInput.addEventListener('change', uploadControlHandler);
-
 const uploadControlHandler = () => {
   imgEditor.classList.remove('hidden');
   body.classList.add('modal-open');
 };
 
-closeImgEditor.addEventListener('click', closeEditorHandler);
-document.addEventListener('keydown', keyEscHandler);
+uploadInput.addEventListener('change', uploadControlHandler);
 
 const closeModal = () => {
   imgEditor.classList.add('hidden');
@@ -30,3 +27,6 @@ const keyEscHandler = (evt) => {
     closeModal();
   }
 };
+
+closeImgEditor.addEventListener('click', closeEditorHandler);
+document.addEventListener('keydown', keyEscHandler);
