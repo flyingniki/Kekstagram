@@ -20,6 +20,7 @@ const uploadControlHandler = () => {
   body.classList.add('modal-open');
   scaleControlValue.value = SCALE.default + '%';
   imgUploadPreview.style.transform = 'scale(1)';
+  imgUploadPreview.classList = '';
 };
 
 uploadInput.addEventListener('change', uploadControlHandler);
@@ -28,8 +29,6 @@ const closeModal = () => {
   imgEditor.classList.add('hidden');
   body.classList.remove('modal-open');
   uploadInput.value = '';
-  closeImgEditor.removeEventListener('click', closeEditorHandler);
-  document.removeEventListener('keydown', keyEscHandler);
 };
 
 const closeEditorHandler = () => {
