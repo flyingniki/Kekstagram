@@ -15,6 +15,7 @@ const SLIDER_VALUES = {
 };
 
 let className = '';
+effectLevel.style.visibility = 'hidden';
 
 const effectButtonHandler = (evt) => {
   let id = evt.target.id;
@@ -25,6 +26,13 @@ const effectButtonHandler = (evt) => {
   }
   imgUploadPreview.classList.add(newClassName);
   className = newClassName;
+  if (newClassName !== 'effects__preview--none') {
+    effectLevel.style.visibility = 'visible';
+  } else {
+    effectLevel.style.visibility = 'hidden';
+  }
+  imgUploadPreview.style.filter = '';
+  slider.noUiSlider.reset();
 };
 
 effectsList.forEach((effect) => {
@@ -44,4 +52,22 @@ window.noUiSlider.create(slider, {
 slider.noUiSlider.on('update', (_, handle, unencoded) => {
   slider.value = unencoded[handle];
   effectLevelValue.value = slider.value;
+
+  if (imgUploadPreview.className === 'effects__preview--chrome') {
+    imgUploadPreview.style.filter = `grayscale(${
+      effectLevelValue.value * 0.01
+    })`;
+  } else if (imgUploadPreview.className === 'effects__preview--sepia') {
+    imgUploadPreview.style.filter = `sepia(${effectLevelValue.value * 0.01})`;
+  } else if (imgUploadPreview.className === 'effects__preview--marvin') {
+    imgUploadPreview.style.filter = `invert(${effectLevelValue.value}%)`;
+  } else if (imgUploadPreview.className === 'effects__preview--phobos') {
+    imgUploadPreview.style.filter = `blur(${effectLevelValue.value * 0.03}px)`;
+  } else if (imgUploadPreview.className === 'effects__preview--heat') {
+    imgUploadPreview.style.filter = `brightness(${
+      effectLevelValue.value * 0.03
+    })`;
+  } else {
+    imgUploadPreview.style.filter = '';
+  }
 });
