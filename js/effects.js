@@ -31,7 +31,6 @@ const effectButtonHandler = (evt) => {
   } else {
     effectLevel.style.visibility = 'hidden';
   }
-  //imgUploadPreview.style.filter = '';
   slider.noUiSlider.reset();
 };
 
