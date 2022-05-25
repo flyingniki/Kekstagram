@@ -20,7 +20,6 @@ const uploadControlHandler = () => {
   body.classList.add('modal-open');
   scaleControlValue.value = SCALE.default + '%';
   imgUploadPreview.style.transform = 'scale(1)';
-  imgUploadPreview.classList = '';
 };
 
 uploadInput.addEventListener('change', uploadControlHandler);
