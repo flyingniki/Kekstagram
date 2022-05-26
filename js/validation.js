@@ -1,53 +1,76 @@
 const hashtags = document.querySelector('.text__hashtags');
 const comment = document.querySelector('.text__description');
-const borderEffect = '5px solid red';
 const submitButton = document.querySelector('.img-upload__submit');
+
+const submitDisable = () => {
+  hashtags.style.border = '5px solid red';
+  submitButton.disabled = true;
+};
+
+const submitEnable = () => {
+  hashtags.setCustomValidity('');
+  hashtags.style.border = '';
+  submitButton.disabled = false;
+};
+
+const validator = {
+  checkFilled: (field) => {
+    return field !== '';
+  },
+  checkStartSymbol: (item) => {
+    return item[0] !== '#';
+  },
+  checkHashtagRules: (item) => {
+    return !item.slice(1).match(/^[0-9A-ZА-ЯЁ]+$/i) && item.length > 1;
+  },
+  checkHashtagName: (item, items) => {
+    return item[0] === '#' && item.length === 1 && items.length <= 5;
+  },
+  checkMaxLength: (item) => {
+    return item.length > 20;
+  },
+  checkHashtagsQuantity: (items) => {
+    return items.length > 5;
+  },
+  checkUnique: (uniqueItems, items) => {
+    return uniqueItems.length !== items.length;
+  },
+};
 
 hashtags.addEventListener('input', () => {
   let hashtagsValue = hashtags.value.toLowerCase().trim();
   let hashtagsArray = hashtagsValue.split(/\s+/);
   let uniqueArray = [];
 
+  if (validator.checkFilled(hashtagsValue)) {
+    submitDisable();
+  } else {
+    submitEnable();
+  }
+
   hashtagsArray.forEach((hashtag) => {
     if (!uniqueArray.includes(hashtag)) {
       uniqueArray.push(hashtag);
     }
 
-    if (hashtag[0] !== '#') {
+    if (validator.checkStartSymbol(hashtag)) {
       hashtags.setCustomValidity('Хэш-тег должен начинаться с символа #');
-      hashtags.style.border = borderEffect;
-      submitButton.disabled = true;
-    } else if (
-      !hashtag.slice(1).match(/^[0-9A-ZА-ЯЁ]+$/i) &&
-      hashtag.length > 1
-    ) {
+    } else if (validator.checkHashtagRules(hashtag)) {
       hashtags.setCustomValidity(
         'Строка после решётки должна состоять из букв и чисел');
-      hashtags.style.border = borderEffect;
-      submitButton.disabled = true;
-    } else if (hashtag[0] === '#' && hashtag.length === 1 && hashtagsArray.length <= 5) {
+    } else if (validator.checkHashtagName(hashtag, hashtagsArray)) {
       hashtags.setCustomValidity(
         'Хеш-тег не может состоять только из одной решётки');
-      hashtags.style.border = borderEffect;
-      submitButton.disabled = true;
-    } else if (hashtag.length > 20) {
+    } else if (validator.checkMaxLength(hashtag)) {
       hashtags.setCustomValidity(
         'Максимальная длина одного хэш-тега 20 символов, включая решётку');
-      hashtags.style.border = borderEffect;
-      submitButton.disabled = true;
-    } else if (hashtagsArray.length > 5) {
+    } else if (validator.checkHashtagsQuantity(hashtagsArray)) {
       hashtags.setCustomValidity('Нельзя указывать больше пяти хэш-тегов');
-      hashtags.style.border = borderEffect;
-      submitButton.disabled = true;
-    } else if (uniqueArray.length !== hashtagsArray.length) {
+    } else if (validator.checkUnique(uniqueArray, hashtagsArray)) {
       hashtags.setCustomValidity(
         'Один и тот же хэш-тег не может быть использован дважды');
-      hashtags.style.border = borderEffect;
-      submitButton.disabled = true;
     } else {
-      hashtags.setCustomValidity('');
-      hashtags.style.border = '';
-      submitButton.disabled = false;
+      submitEnable();
     }
   });
 
