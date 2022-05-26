@@ -19,7 +19,7 @@ effectLevel.style.visibility = 'hidden';
 
 const effectButtonHandler = (evt) => {
   let id = evt.target.id;
-  let effectName = id.slice(7);
+  let effectName = id.replace('effect-', '');
   let newClassName = 'effects__preview--' + `${effectName}`;
   if (className !== '') {
     imgUploadPreview.classList.remove(className);
