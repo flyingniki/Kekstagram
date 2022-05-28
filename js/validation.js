@@ -44,35 +44,34 @@ hashtags.addEventListener('input', () => {
 
   if (validator.checkFilled(hashtagsValue)) {
     submitDisable();
+    hashtagsArray.forEach((hashtag) => {
+      if (!uniqueArray.includes(hashtag)) {
+        uniqueArray.push(hashtag);
+      }
+
+      if (validator.checkStartSymbol(hashtag)) {
+        hashtags.setCustomValidity('Хэш-тег должен начинаться с символа #');
+      } else if (validator.checkHashtagRules(hashtag)) {
+        hashtags.setCustomValidity(
+          'Строка после решётки должна состоять из букв и чисел');
+      } else if (validator.checkHashtagName(hashtag, hashtagsArray)) {
+        hashtags.setCustomValidity(
+          'Хеш-тег не может состоять только из одной решётки');
+      } else if (validator.checkMaxLength(hashtag)) {
+        hashtags.setCustomValidity(
+          'Максимальная длина одного хэш-тега 20 символов, включая решётку');
+      } else if (validator.checkHashtagsQuantity(hashtagsArray)) {
+        hashtags.setCustomValidity('Нельзя указывать больше пяти хэш-тегов');
+      } else if (validator.checkUnique(uniqueArray, hashtagsArray)) {
+        hashtags.setCustomValidity(
+          'Один и тот же хэш-тег не может быть использован дважды');
+      } else {
+        submitEnable();
+      }
+    });
   } else {
     submitEnable();
   }
-
-  hashtagsArray.forEach((hashtag) => {
-    if (!uniqueArray.includes(hashtag)) {
-      uniqueArray.push(hashtag);
-    }
-
-    if (validator.checkStartSymbol(hashtag)) {
-      hashtags.setCustomValidity('Хэш-тег должен начинаться с символа #');
-    } else if (validator.checkHashtagRules(hashtag)) {
-      hashtags.setCustomValidity(
-        'Строка после решётки должна состоять из букв и чисел');
-    } else if (validator.checkHashtagName(hashtag, hashtagsArray)) {
-      hashtags.setCustomValidity(
-        'Хеш-тег не может состоять только из одной решётки');
-    } else if (validator.checkMaxLength(hashtag)) {
-      hashtags.setCustomValidity(
-        'Максимальная длина одного хэш-тега 20 символов, включая решётку');
-    } else if (validator.checkHashtagsQuantity(hashtagsArray)) {
-      hashtags.setCustomValidity('Нельзя указывать больше пяти хэш-тегов');
-    } else if (validator.checkUnique(uniqueArray, hashtagsArray)) {
-      hashtags.setCustomValidity(
-        'Один и тот же хэш-тег не может быть использован дважды');
-    } else {
-      submitEnable();
-    }
-  });
 
   hashtags.reportValidity();
 });
