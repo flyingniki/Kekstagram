@@ -71,7 +71,7 @@ function addComments() {
 }
 
 function addPhotos() {
-  let photos = [];
+  const photos = [];
   for (let i = 0; i < PHOTOS_COUNT; i++) {
     photos.push({
       id: i + 1,

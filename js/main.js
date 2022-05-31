@@ -1,6 +1,8 @@
-import { addPreviewPictures } from './preview.js';
+import { getData } from './server.js';
 import './editor.js';
 import './effects.js';
 import './validation.js';
+import { sendForm } from './send-form.js';
 
-addPreviewPictures();
+getData();
+sendForm();
