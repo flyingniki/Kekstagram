@@ -31,67 +31,79 @@ const sendForm = () => {
       body: formData,
     })
       .then(checkStatus)
-      .then(onSuccess)
-      .catch(onError);
+      .then(onSuccessMessage)
+      .catch(onErrorMessage);
   });
-
-  function checkStatus(response) {
-    if (response.ok) {
-      return response;
-    }
-    const { statusText, status } = response;
-    throw new Error(`${status} — ${statusText}`);
-  }
-
-  function onSuccess() {
-    let className = imgUploadPreview.className;
-    imgEditor.classList.add('hidden');
-    body.classList.remove('modal-open');
-    uploadInput.value = '';
-    scaleControlValue.value = SCALE.default + '%';
-    imgUploadPreview.style.transform = 'scale(1)';
-    if (className !== '') {
-      imgUploadPreview.classList.remove(className);
-    }
-    imgUploadForm.reset();
-    slider.noUiSlider.reset();
-    document.body.append(successElement);
-    successButton.addEventListener('click', closeSuccessHandler);
-  }
-
-  function onError() {
-    let className = imgUploadPreview.className;
-    imgEditor.classList.add('hidden');
-    body.classList.remove('modal-open');
-    uploadInput.value = '';
-    scaleControlValue.value = SCALE.default + '%';
-    imgUploadPreview.style.transform = 'scale(1)';
-    if (className !== '') {
-      imgUploadPreview.classList.remove(className);
-    }
-    imgUploadForm.reset();
-    slider.noUiSlider.reset();
-    document.body.append(errorElement);
-    errorButton.addEventListener('click', closeErrorHandler);
-  }
-
-  function closeSuccess() {
-    successElement.classList.add('hidden');
-    successButton.removeEventListener('click', closeSuccessHandler);
-  }
-
-  function closeSuccessHandler() {
-    closeSuccess();
-  }
-
-  function closeError() {
-    errorElement.classList.add('hidden');
-    errorButton.removeEventListener('click', closeErrorHandler);
-  }
-
-  function closeErrorHandler() {
-    closeError();
-  }
 };
 
-export { sendForm };
+function checkStatus(response) {
+  if (response.ok) {
+    return response;
+  }
+  const { statusText, status } = response;
+  throw new Error(`${status} — ${statusText}`);
+}
+
+function onSuccessMessage() {
+  closeModal();
+  document.body.append(successElement);
+  successElement.classList.remove('hidden');
+  successButton.addEventListener('click', closeSuccessHandler);
+  document.addEventListener('keydown', keyEscHandler);
+  document.addEventListener('click', areaClickHandler);
+}
+
+function onErrorMessage() {
+  closeModal();
+  document.body.append(errorElement);
+  errorElement.classList.remove('hidden');
+  errorButton.addEventListener('click', closeErrorHandler);
+  document.addEventListener('keydown', keyEscHandler);
+  document.addEventListener('click', areaClickHandler);
+}
+
+function closeSuccessMessage() {
+  successElement.classList.add('hidden');
+}
+
+function closeErrorMessage() {
+  errorElement.classList.add('hidden');
+}
+
+function closeSuccessHandler() {
+  closeSuccessMessage();
+}
+
+function closeErrorHandler() {
+  closeErrorMessage();
+}
+
+function keyEscHandler(evt) {
+  if (evt.key === 'Escape' || evt.key === 'Esc') {
+    closeSuccessMessage();
+    closeErrorMessage();
+  }
+}
+
+function areaClickHandler(evt) {
+  if (evt.target.className !== 'success__inner') {
+    closeSuccessMessage();
+    closeErrorMessage();
+  }
+}
+
+function closeModal() {
+  let className = imgUploadPreview.className;
+  imgEditor.classList.add('hidden');
+  body.classList.remove('modal-open');
+  uploadInput.value = '';
+  scaleControlValue.value = SCALE.default + '%';
+  imgUploadPreview.style.transform = 'scale(1)';
+  if (className !== '') {
+    imgUploadPreview.classList.remove(className);
+  }
+  imgUploadForm.reset();
+  slider.noUiSlider.reset();
+}
+
+export { sendForm, closeModal };

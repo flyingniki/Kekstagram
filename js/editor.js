@@ -1,3 +1,5 @@
+import { closeModal } from './send-form.js';
+
 const uploadInput = document.querySelector('#upload-file');
 const imgEditor = document.querySelector('.img-upload__overlay');
 const closeImgEditor = document.querySelector('#upload-cancel');
@@ -18,17 +20,9 @@ const SCALE = {
 const uploadControlHandler = () => {
   imgEditor.classList.remove('hidden');
   body.classList.add('modal-open');
-  scaleControlValue.value = SCALE.default + '%';
-  imgUploadPreview.style.transform = 'scale(1)';
 };
 
 uploadInput.addEventListener('change', uploadControlHandler);
-
-const closeModal = () => {
-  imgEditor.classList.add('hidden');
-  body.classList.remove('modal-open');
-  uploadInput.value = '';
-};
 
 const closeEditorHandler = () => {
   closeModal();

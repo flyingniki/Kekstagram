@@ -92,7 +92,7 @@
                       <input
                         type="text"
                         class="scale__control scale__control--value"
-                        value="55%"
+                        value="100%"
                         title="Image Scale"
                         name="scale"
                         readonly
@@ -298,7 +298,8 @@
 
             <!-- Комментарии к изображению -->
             <div class="social__comment-count">
-              5 из <span class="comments-count">125</span> комментариев
+              <span class="comment-count">5</span> из
+              <span class="comments-count">125</span> комментариев
             </div>
             <ul class="social__comments">
               <li class="social__comment">
@@ -438,7 +439,7 @@
 
     <!-- Сообщение с ошибкой загрузки изображения -->
     <template id="error">
-      <section class="error">
+      <section class="error hidden">
         <div class="error__inner">
           <h2 class="error__title">Ошибка загрузки файла</h2>
           <button type="button" class="error__button">
@@ -450,7 +451,7 @@
 
     <!-- Сообщение об успешной загрузке изображения -->
     <template id="success">
-      <section class="success">
+      <section class="success hidden">
         <div class="success__inner">
           <h2 class="success__title">Изображение успешно загружено</h2>
           <button type="button" class="success__button">Круто!</button>
