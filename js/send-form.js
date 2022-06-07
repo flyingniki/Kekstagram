@@ -45,7 +45,7 @@ function checkStatus(response) {
 }
 
 function onSuccessMessage() {
-  closeModal();
+  closeEditorModal();
   document.body.append(successElement);
   successElement.classList.remove('hidden');
   successButton.addEventListener('click', closeSuccessHandler);
@@ -54,7 +54,7 @@ function onSuccessMessage() {
 }
 
 function onErrorMessage() {
-  closeModal();
+  closeEditorModal();
   document.body.append(errorElement);
   errorElement.classList.remove('hidden');
   errorButton.addEventListener('click', closeErrorHandler);
@@ -92,7 +92,7 @@ function areaClickHandler(evt) {
   }
 }
 
-function closeModal() {
+function closeEditorModal() {
   let className = imgUploadPreview.className;
   imgEditor.classList.add('hidden');
   body.classList.remove('modal-open');
@@ -106,4 +106,4 @@ function closeModal() {
   slider.noUiSlider.reset();
 }
 
-export { sendForm, closeModal };
+export { sendForm, closeEditorModal };

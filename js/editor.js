@@ -1,4 +1,4 @@
-import { closeModal } from './send-form.js';
+import { closeEditorModal } from './send-form.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const imgEditor = document.querySelector('.img-upload__overlay');
@@ -25,12 +25,12 @@ const uploadControlHandler = () => {
 uploadInput.addEventListener('change', uploadControlHandler);
 
 const closeEditorHandler = () => {
-  closeModal();
+  closeEditorModal();
 };
 
 const keyEscHandler = (evt) => {
   if (evt.key === 'Escape' || evt.key === 'Esc') {
-    closeModal();
+    closeEditorModal();
   }
 };
 
