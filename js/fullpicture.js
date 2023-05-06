@@ -39,7 +39,6 @@ function showPicture(url, comments, likes, description) {
 }
 
 function showComments(comments, offset, quantity) {
-  console.log(offset, quantity);
   const newComments = comments.slice(0, quantity);
   shownCommentsCount.textContent = newComments.length;
   if (newComments.length === comments.length) {

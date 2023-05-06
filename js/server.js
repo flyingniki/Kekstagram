@@ -1,4 +1,5 @@
 import { addPreviewPictures } from './preview.js';
+import { showFilter } from './filters.js';
 
 const errorMessage = document.querySelector('.server-error');
 const errorButton = document.querySelector('.server-error__button');
@@ -9,6 +10,7 @@ const getData = () => {
     .then((response) => response.json())
     .then(addPhotos)
     .then(addPreviewPictures)
+    .then(showFilter)
     .catch(showErrors);
 };
 
